@@ -1,9 +1,9 @@
 {
-  "realm": "quickstart",
+  "realm": "demo",
   "enabled": true,
   "clients": [
     {
-      "clientId": "spa",
+      "clientId": "js-app",
       "enabled": true,
       "publicClient": true,
       "directAccessGrantsEnabled": true,

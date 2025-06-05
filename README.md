@@ -13,7 +13,15 @@ git clone https://github.com/mposolda/keycloakcon-2025.git
 cd keycloakcon-2025
 ```
 
-2) Import the realm - TODO
+2) Download and unzip Keycloak server to some location on your laptop. The Keycloak server 26.2.4 or later should work. Assumption that server was unpacked to the directory `keycloak-26.2.4-demo`,
+then server could be started on port 8180 with the command like this:
+```
+keycloak-26.2.4-demo/bin
+./kc.sh start-dev --http-port=8180
+```
+
+3) Open the http://localhost:8180 and create user `admin`. Then login to the admin console and import the realm `realm-import.json` from this directory. See the Keycloak documentation
+for the details about creating new user and importing the realm.
 
 
 

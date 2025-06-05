@@ -11,6 +11,7 @@
       }
     </script>
     <link rel="modulepreload" href="/vendor/keycloak.js">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div id="user" style="display: none;">
@@ -21,6 +22,7 @@
       <button id="refreshToken" type="button">Refresh</button>
       <hr>
       <h2 id="name"></h2>
+      <h4 id="birthdate"></h4>
       <pre id="output"></pre>
     </div>
     <script type="module">
@@ -28,6 +30,7 @@
 
       const outputElement = document.getElementById("output");
       const nameElement = document.getElementById("name");
+      const birthdateElement = document.getElementById("birthdate");
       const userElement = document.getElementById("user");
 
       function output(content) {
@@ -43,7 +46,10 @@
           keycloak.idTokenParsed.name ||
           keycloak.idTokenParsed.preferred_username;
 
+        const birthdate = keycloak.idTokenParsed.birthdate || 'Unknown';
+
         nameElement.textContent = `Hello ${name}`;
+        birthdateElement.textContent = `You were born on date: ${birthdate}`;
         userElement.style.display = "block";
       }
 
@@ -77,8 +83,8 @@
 
       const keycloak = new Keycloak({
         url: "http://localhost:8180",
-        realm: "quickstart",
-        clientId: "spa",
+        realm: "demo",
+        clientId: "js-app",
       });
 
       await keycloak.init({ onLoad: "login-required" });
