@@ -74,14 +74,24 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <version.surefire.plugin>3.0.0-M7</version.surefire.plugin>
+        <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
+
+        <version.jakarta.ws.rs-api>3.1.0</version.jakarta.ws.rs-api>
     </properties>
 
     <modules>
-        <!--<module>misc</module>-->
+        <module>calendar-backend</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>jakarta.ws.rs</groupId>
+                <artifactId>jakarta.ws.rs-api</artifactId>
+                <version>${version.jakarta.ws.rs-api}</version>
+            </dependency>
             <!--<dependency>
                 <groupId>org.keycloak</groupId>
                 <artifactId>keycloak-policy-enforcer</artifactId>

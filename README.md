@@ -6,6 +6,15 @@ This project is an example for KeycloakCon demo 2025.
 
 ## Building, Testing, and Running the Quickstarts
 
+Demo tested with those version:
+
+* OpenJDK 21.0.7
+* Apache Maven 3.9.9
+* Wildfly 30
+* Node 23.11.0
+* Npm 10.9.2
+
+
 1) Clone the Keycloak repository:
 
 ```
@@ -22,6 +31,32 @@ keycloak-26.2.4-demo/bin
 
 3) Open the http://localhost:8180 and create user `admin`. Then login to the admin console and import the realm `realm-import.json` from this directory. See the Keycloak documentation
 for the details about creating new user and importing the realm.
+
+4) Run this to run `js-app`  
+
+```
+cd js-app
+npm install
+npm start
+```
+
+5) Go to http://localhost:8080 and login as `alice/alice`
+
+6) Download and start Wildfly 30.0.0.Final to some location on your laptop. Will be referred to as $WILDFLY_HOME:
+
+```
+cd $WILDFLY_HOME/bin
+./standalone.sh -Djboss.socket.binding.port-offset=200
+```
+
+7) Build the project with the demo and copy the deployed WAR file to the started Wildfly server:
+
+```
+mvn clean install
+cp calendar-backend/target/calendar-backend.war $WILDFLY_HOME/standalone/deployments/
+```
+
+8) 
 
 
 

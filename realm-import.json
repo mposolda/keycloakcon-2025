@@ -6,8 +6,15 @@
       "clientId": "js-app",
       "enabled": true,
       "publicClient": true,
-      "directAccessGrantsEnabled": true,
+      "directAccessGrantsEnabled": false,
       "redirectUris": [ "http://localhost:8080/*" ]
+    },
+    {
+      "clientId": "calendar-backend",
+      "enabled": true,
+      "bearerOnly": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
     }
   ],
   "users" : [
