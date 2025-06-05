@@ -79,6 +79,7 @@
         <version.failsafe.plugin>3.0.0-M7</version.failsafe.plugin>
 
         <version.jakarta.ws.rs-api>3.1.0</version.jakarta.ws.rs-api>
+        <version.jakarta.servlet-api>6.0.0</version.jakarta.servlet-api>
     </properties>
 
     <modules>
@@ -91,6 +92,11 @@
                 <groupId>jakarta.ws.rs</groupId>
                 <artifactId>jakarta.ws.rs-api</artifactId>
                 <version>${version.jakarta.ws.rs-api}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${version.jakarta.servlet-api}</version>
             </dependency>
             <!--<dependency>
                 <groupId>org.keycloak</groupId>

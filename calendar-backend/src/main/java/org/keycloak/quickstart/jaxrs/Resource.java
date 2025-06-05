@@ -33,25 +33,33 @@ public class Resource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("public")
     public Response getPublic(){
-        return Response.ok(List.of(new CalendarEvent("2025-06-05","Public event"))).header("Access-Control-Allow-Origin", "*").build();
+        return wrapEvents(List.of(new CalendarEvent("2025-06-05","Public event")));
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("secured")
-    public List<CalendarEvent> getSecured() {
-        return List.of(
+    public Response getSecured() {
+        List<CalendarEvent> events = List.of(
                 new CalendarEvent("2025-06-20","KeycloakCon Japan"),
                 new CalendarEvent("2025-06-16","KubeCon + CloudNativeCon Japan - Day 1"),
                 new CalendarEvent("2025-06-17","KubeCon + CloudNativeCon Japan - Day 2")
         );
+        return wrapEvents(events);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
-    public List<CalendarEvent> getAdmin() {
-        return List.of(new CalendarEvent("2025-06-20","Private event for administrators only"));
+    public Response getAdmin() {
+        List<CalendarEvent> events = List.of(new CalendarEvent("2025-06-20","Private event for administrators only"));
+        return wrapEvents(events);
+    }
+
+    private Response wrapEvents(List<CalendarEvent> events) {
+        return Response.ok(events)
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
     }
 
 }

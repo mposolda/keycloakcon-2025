@@ -51,4 +51,17 @@
     <security-role>
         <role-name>admin</role-name>
     </security-role>
+
+<!--    <filter>
+        <filter-name>ServletCorsFilter</filter-name>
+        <filter-class>org.keycloak.quickstart.jaxrs.ServletCorsFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ServletCorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>-->
+
 </web-app>

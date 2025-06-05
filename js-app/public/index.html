@@ -20,9 +20,11 @@
       <button id="showIdToken" type="button">Show ID Token</button>
       <button id="showAccessToken" type="button">Show Access Token</button>
       <button id="refreshToken" type="button">Refresh</button>
+      <button id="calendarEvents" type="button">Calendar events</button>
       <hr>
       <h2 id="name"></h2>
       <h4 id="birthdate"></h4>
+      <hr />
       <pre id="output"></pre>
     </div>
     <script type="module">
@@ -79,6 +81,42 @@
         .getElementById("showMyAccount")
         .addEventListener("click", async () => {
           await keycloak.accountManagement()
+        });
+
+      document
+        .getElementById("calendarEvents")
+        .addEventListener("click", async () => {
+          try {
+            await fetch("http://localhost:8280/calendar-backend/secured", {
+              method: "GET",
+              headers: {
+                "Authorization": "Bearer " + keycloak.token,
+              },
+            }).then((response) => {
+                if (!response.ok) {
+                    return "Cannot load events. Error: " + response.status;
+                } else {
+                    return response.json();
+                }
+            })
+            .then((json) => {
+                if (typeof json === "object") {
+                    output(json);
+                    let myEvents = "";
+                    json.forEach((element, index) => {
+                        myEvents = myEvents + "Event date: " + element.date + ", Event: " + element.message + "\n";
+                        console.log(element);
+                    });
+                    console.log("Events: " + myEvents);
+                    output(myEvents);
+                } else {
+                    output(json);
+                }
+            });
+          } catch (error) {
+            output("Cannot load calendar events");
+            console.error("Hello " + error);
+          }
         });
 
       const keycloak = new Keycloak({
