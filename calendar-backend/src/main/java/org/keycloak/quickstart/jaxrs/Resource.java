@@ -21,10 +21,7 @@ import java.util.List;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 @Path("/")
 public class Resource {
@@ -32,34 +29,31 @@ public class Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("public")
-    public Response getPublic(){
-        return wrapEvents(List.of(new CalendarEvent("2025-06-05","Public event")));
+    public List<CalendarEvent> getPublic(){
+        List<CalendarEvent> events = List.of(new CalendarEvent("2025-06-05","Public event"));
+        return events;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("secured")
-    public Response getSecured() {
+    public List<CalendarEvent> getSecured() {
         List<CalendarEvent> events = List.of(
                 new CalendarEvent("2025-06-20","KeycloakCon Japan"),
                 new CalendarEvent("2025-06-16","KubeCon + CloudNativeCon Japan - Day 1"),
                 new CalendarEvent("2025-06-17","KubeCon + CloudNativeCon Japan - Day 2")
         );
-        return wrapEvents(events);
+        return events;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
-    public Response getAdmin() {
-        List<CalendarEvent> events = List.of(new CalendarEvent("2025-06-20","Private event for administrators only"));
-        return wrapEvents(events);
-    }
-
-    private Response wrapEvents(List<CalendarEvent> events) {
-        return Response.ok(events)
-                .header("Access-Control-Allow-Origin", "*")
-                .build();
+    public List<CalendarEvent> getAdmin() {
+        List<CalendarEvent> events = List.of(
+                new CalendarEvent("2025-06-20","Private event for administrators only")
+        );
+        return events;
     }
 
 }

@@ -55,6 +55,15 @@
         userElement.style.display = "block";
       }
 
+      function convertEvents(jsonEvents) {
+          // console.log(jsonEvents);
+          let myEvents = "";
+          jsonEvents.forEach((element, index) => {
+              myEvents = myEvents + "Event date: " + element.date + ", Event: " + element.message + "\n";
+          });
+          return myEvents;
+      }
+
       document.getElementById("logout").addEventListener("click", () => {
         keycloak.logout();
       });
@@ -101,21 +110,15 @@
             })
             .then((json) => {
                 if (typeof json === "object") {
-                    output(json);
-                    let myEvents = "";
-                    json.forEach((element, index) => {
-                        myEvents = myEvents + "Event date: " + element.date + ", Event: " + element.message + "\n";
-                        console.log(element);
-                    });
-                    console.log("Events: " + myEvents);
-                    output(myEvents);
+                    let htmlEvents = convertEvents(json);
+                    output(htmlEvents);
                 } else {
                     output(json);
                 }
             });
           } catch (error) {
-            output("Cannot load calendar events");
-            console.error("Hello " + error);
+            output("Cannot load calendar events due to unexpected error");
+            console.error("Unexpected error: " + error);
           }
         });
 
