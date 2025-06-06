@@ -23,15 +23,15 @@ git clone https://github.com/mposolda/keycloakcon-2025.git
 cd keycloakcon-2025
 ```
 
-2) Download and unzip Keycloak server to some location on your laptop. The Keycloak server 26.2.4 or later should work. Assumption that server was unpacked to the directory `keycloak-26.2.4-demo`,
-then server could be started on port 8180 with the command like this:
+2) Download and unzip Keycloak server to some location on your laptop. The Keycloak server 26.2.4 or later should work. Assumption that
+server was unpacked to the directory `$KEYCLOAK_HOME`, then server could be started on port 8180 with the command like this:
 ```
-keycloak-26.2.4-demo/bin
+cd $KEYCLOAK_HOME/bin
 ./kc.sh start-dev --http-port=8180
 ```
 
-3) Open the http://localhost:8180 and create user `admin`. Then login to the admin console and import the realm `realm-import.json` from this directory. See the Keycloak documentation
-for the details about creating new user and importing the realm.
+3) Open the http://localhost:8180 and create user `admin`. Then login to the admin console and import the realm `realm-import.json` from this directory.
+See the Keycloak documentation for the details about creating new user and importing the realm.
 
 4) Run this to run `js-app`  
 
@@ -60,10 +60,10 @@ Problems to solve during the demo:
 
 - Displayed `birthdate` in the application is unknown. in tab 1 in the admin console, it is needed to create
 user-profile attribute `birthdate` in the Keycloak admin console, mark it as required for the users and add
-annotation `inputTye` with type `html5-date` . Then after refresh the page  http://localhost:8080 , alice is required to fill her birthdate.
+annotation `inputTye` with type `html5-date` . Then after refresh the page  http://localhost:8080 in tab 2, alice is required to fill her birthdate.
 Now birthdate should be shown in the application. (Protocol mappers could be also shown during the demo).
 
-- User cannot see events in the application due the 403. It is needed to assign her the realm role `user`.
+- Alice cannot see events in the application due the 403. It is needed to assign her the realm role `user` in the admin console.
 It can be also good to show the calendar-backend application code and the client-scopes switch `Full scope allowed`.
   
 
