@@ -10,6 +10,7 @@ Demo tested with those version:
 
 * OpenJDK 21.0.7
 * Apache Maven 3.9.9
+* Keycloak 26.2.4
 * Wildfly 30
 * Node 23.11.0
 * Npm 10.9.2
@@ -40,27 +41,31 @@ npm install
 npm start
 ```
 
-5) Go to http://localhost:8080 and login as `alice/alice`
-
-6) Download and start Wildfly 30.0.0.Final to some location on your laptop. Will be referred to as $WILDFLY_HOME:
+5) Download and start Wildfly 30.0.0.Final to some location on your laptop. Will be referred to as $WILDFLY_HOME:
 
 ```
 cd $WILDFLY_HOME/bin
 ./standalone.sh -Djboss.socket.binding.port-offset=200
 ```
 
-7) Build the project with the demo and copy the deployed WAR file to the started Wildfly server:
+6) Build the project with the demo and copy the deployed WAR file to the started Wildfly server:
 
 ```
 mvn clean install
 cp calendar-backend/target/calendar-backend.war $WILDFLY_HOME/standalone/deployments/
 ```
 
-8) 
+7) Assumption is that tab 1 has admin console opened. So in different browser tab (browser tab 2) go to http://localhost:8080 and login as `alice/alice` .
+Problems to solve during the demo:
 
+- Displayed `birthdate` in the application is unknown. in tab 1 in the admin console, it is needed to create
+user-profile attribute `birthdate` in the Keycloak admin console, mark it as required for the users and add
+annotation `inputTye` with type `html5-date` . Then after refresh the page  http://localhost:8080 , alice is required to fill her birthdate.
+Now birthdate should be shown in the application. (Protocol mappers could be also shown during the demo).
 
-
-
+- User cannot see events in the application due the 403. It is needed to assign her the realm role `user`.
+It can be also good to show the calendar-backend application code and the client-scopes switch `Full scope allowed`.
+  
 
 ## Documentation
 

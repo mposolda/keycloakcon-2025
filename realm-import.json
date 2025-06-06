@@ -28,7 +28,7 @@
         { "type" : "password",
           "value" : "alice" }
       ],
-      "realmRoles": [ "user", "offline_access"  ],
+      "realmRoles": [ "offline_access"  ],
       "clientRoles": {
         "account": [ "manage-account" ]
       }
