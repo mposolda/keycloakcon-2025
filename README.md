@@ -70,10 +70,14 @@ It can be also good to show the calendar-backend application code and the client
 ## Documentation
 
 * [Documentation](https://www.keycloak.org/documentation.html)
+* [Keycloak Getting started guides](https://www.keycloak.org/guides#getting-started)
+* [Keycloak server admin guide](https://www.keycloak.org/docs/latest/server_admin/index.html) - Management of users, clients, roles, role mappings, etc.
+* [Keycloak Javascript adapter](https://www.keycloak.org/securing-apps/javascript-adapter) - used to secure `js-app` application in this demo
+* [Wildfly Elytron OIDC adapter documentation](https://docs.wildfly.org/30/Admin_Guide.html#Elytron_OIDC_Client) - used to secure `calendar-backend` application in this demo
 
 ## Related Projects
 
-* [Keycloak](https://github.com/keycloak/keycloak) - Keycloak Server and Java adapters
+* [Keycloak](https://github.com/keycloak/keycloak) - Keycloak Server source code
 
 ## License
 
