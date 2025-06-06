@@ -43,6 +43,10 @@
         outputElement.textContent = content;
       }
 
+      function htmlOutput(content) {
+        outputElement.innerHTML = content;
+      }
+
       function showProfile() {
         const name =
           keycloak.idTokenParsed.name ||
@@ -56,12 +60,12 @@
       }
 
       function convertEvents(jsonEvents) {
-          // console.log(jsonEvents);
-          let myEvents = "";
-          jsonEvents.forEach((element, index) => {
-              myEvents = myEvents + "Event date: " + element.date + ", Event: " + element.message + "\n";
-          });
-          return myEvents;
+        // console.log(jsonEvents);
+        let myEvents = "";
+        jsonEvents.forEach((element, index) => {
+          myEvents = myEvents + "<b>Event date: </b>" + element.date + ", <b>Event: </b>" + element.message + "<br />";
+        });
+        return myEvents;
       }
 
       document.getElementById("logout").addEventListener("click", () => {
@@ -102,22 +106,22 @@
                 "Authorization": "Bearer " + keycloak.token,
               },
             }).then((response) => {
-                if (!response.ok) {
-                    return "Cannot load events. Error: " + response.status;
-                } else {
-                    return response.json();
-                }
+              if (!response.ok) {
+                return '<span class="error">Cannot load events. Error: ' + response.status + '</span>';
+              } else {
+                return response.json();
+              }
             })
             .then((json) => {
-                if (typeof json === "object") {
-                    let htmlEvents = convertEvents(json);
-                    output(htmlEvents);
-                } else {
-                    output(json);
-                }
+              if (typeof json === "object") {
+                let htmlEvents = convertEvents(json);
+                htmlOutput(htmlEvents);
+              } else {
+                htmlOutput(json);
+              }
             });
           } catch (error) {
-            output("Cannot load calendar events due to unexpected error");
+            htmlOutput('<span class="error">Cannot load calendar events due to unexpected error</span>');
             console.error("Unexpected error: " + error);
           }
         });
