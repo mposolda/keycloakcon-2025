@@ -60,7 +60,7 @@ Problems to solve during the demo:
 
 - Displayed `birthdate` in the application is unknown. in tab 1 in the admin console, it is needed to create
 user-profile attribute `birthdate` in the Keycloak admin console, mark it as required for the users and add
-annotation `inputTye` with type `html5-date` . Then after refresh the page  http://localhost:8080 in tab 2, alice is required to fill her birthdate.
+annotation `inputType` with type `html5-date` . Then after refresh the page  http://localhost:8080 in tab 2, alice is required to fill her birthdate.
 Now birthdate should be shown in the application. (Protocol mappers could be also shown during the demo).
 
 - Alice cannot see events in the application due the 403. It is needed to assign her the realm role `user` in the admin console.
