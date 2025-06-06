@@ -68,6 +68,35 @@
         return myEvents;
       }
 
+      async function downloadEvents() {
+          try {
+            await fetch("http://localhost:8280/calendar-backend/secured", {
+              method: "GET",
+              headers: {
+                "Authorization": "Bearer " + keycloak.token,
+              },
+            })
+            .then((response) => {
+              if (!response.ok) {
+                return '<span class="error">Cannot load events. Error: ' + response.status + '</span>';
+              } else {
+                return response.json();
+              }
+            })
+            .then((json) => {
+              if (typeof json === "object") {
+                let htmlEvents = convertEvents(json);
+                htmlOutput(htmlEvents);
+              } else {
+                htmlOutput(json);
+              }
+            });
+          } catch (error) {
+            htmlOutput('<span class="error">Cannot load calendar events due to unexpected error</span>');
+            console.error("Unexpected error: " + error);
+          }
+      }
+
       document.getElementById("logout").addEventListener("click", () => {
         keycloak.logout();
       });
@@ -99,31 +128,9 @@
       document
         .getElementById("calendarEvents")
         .addEventListener("click", async () => {
-          try {
-            await fetch("http://localhost:8280/calendar-backend/secured", {
-              method: "GET",
-              headers: {
-                "Authorization": "Bearer " + keycloak.token,
-              },
-            }).then((response) => {
-              if (!response.ok) {
-                return '<span class="error">Cannot load events. Error: ' + response.status + '</span>';
-              } else {
-                return response.json();
-              }
-            })
-            .then((json) => {
-              if (typeof json === "object") {
-                let htmlEvents = convertEvents(json);
-                htmlOutput(htmlEvents);
-              } else {
-                htmlOutput(json);
-              }
-            });
-          } catch (error) {
-            htmlOutput('<span class="error">Cannot load calendar events due to unexpected error</span>');
-            console.error("Unexpected error: " + error);
-          }
+            // Before sending accessToken to REST resource, refresh access token when it is expired or is about to expire in 5 seconds or less
+            await keycloak.updateToken(5)
+            .then((refreshed) => downloadEvents());
         });
 
       const keycloak = new Keycloak({
